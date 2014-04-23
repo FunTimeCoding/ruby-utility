@@ -1,3 +1,4 @@
+require 'spec_helper'
 require 'NAME'
 
 describe NAME do

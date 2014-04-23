@@ -6,7 +6,7 @@ Install testing tools
 
 ```sh
 #!/bin/sh
-gem install rspec
+gem install rspec simplecov
 ```
 
 Run specs
