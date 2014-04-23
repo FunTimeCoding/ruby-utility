@@ -1,18 +1,34 @@
 # Ruby Skeleton
 
-Run specs
+## Testing
+
+Install testing tools
 
 ```sh
 #!/bin/sh
 gem install rspec
+```
+
+Run specs
+
+```sh
+#!/bin/sh
 rspec
+```
+
+## Continuous Integration
+
+Install JUnit formatter for rspec
+
+```sh
+#!/bin/sh
+gem install rspec_junit_formatter
 ```
 
 Run rspec with JUnit output.
 
 ```sh
 #!/bin/sh
-gem install rspec_junit_formatter
 rspec --format RspecJunitFormatter  --out rspec.xml
 ```
 
