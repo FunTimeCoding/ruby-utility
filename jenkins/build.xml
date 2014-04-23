@@ -17,7 +17,7 @@
         <exec executable="bash">
             <arg value="-l"/>
             <arg value="-c"/>
-            <arg value="rspec --format RspecJunitFormatter --out jenkins/build/log/rspec.xml"/>
+            <arg value="COVERAGE=on rspec --format RspecJunitFormatter --out jenkins/build/log/rspec.xml"/>
         </exec>
     </target>
 </project>

@@ -6,7 +6,7 @@ Install testing tools
 
 ```sh
 #!/bin/sh
-gem install rspec simplecov
+gem install rspec simplecov simplecov-rcov
 ```
 
 Run specs
@@ -25,10 +25,10 @@ Install JUnit formatter for rspec
 gem install rspec_junit_formatter
 ```
 
-Run rspec with JUnit output.
+Run rspec with JUnit output and SimpleCov coverage.
 
 ```sh
 #!/bin/sh
-rspec --format RspecJunitFormatter  --out rspec.xml
+COVERAGE=on rspec --format RspecJunitFormatter  --out rspec.xml
 ```
 
