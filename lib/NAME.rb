@@ -3,4 +3,3 @@ class NAME
         a + b
     end
 end
-

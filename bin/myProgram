@@ -1,3 +1,4 @@
 #!/usr/bin/env ruby
+require 'NAME'
 
-
+puts NAME.new.add(1, 2)

@@ -1,4 +1,4 @@
-if(ENV['COVERAGE'] == 'on')
+if (ENV['COVERAGE'] == 'on')
     require 'simplecov'
     require 'simplecov-rcov'
     class SimpleCov::Formatter::MergedFormatter
@@ -13,4 +13,3 @@ if(ENV['COVERAGE'] == 'on')
         add_filter "/vendor/"
     end
 end
-
