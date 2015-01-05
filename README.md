@@ -3,44 +3,35 @@
 
 ## Operation
 
-To run the program from the `bin` directory, pass the argument `-I`.
+Run scripts.
 
 ```sh
 ruby -I lib bin/example-script
 ```
 
 
-## Running tests
+## Testing
 
-Run this command to install testing tools.
+Install test tools.
 
 ```sh
-gem install rspec simplecov simplecov-rcov
+gem install rspec simplecov simplecov-rcov rspec_junit_formatter
 ```
 
-Run this command to run specs.
+Run tests.
 
 ```sh
 rspec
 ```
 
-
-## Continuous integration
-
-Install `rspec_junit_formatter` for JUnit formatting rspec output.
-
-```sh
-gem install rspec_junit_formatter
-```
-
-Run rspec with JUnit output and SimpleCov coverage.
-
-```sh
-COVERAGE=on rspec --format RspecJunitFormatter --out rspec.xml
-```
-
-Run ant like CI would. Requires ant to be installed.
+Run ant like Jenkins. Requires `ant` to be installed.
 
 ```sh
 ant
 ```
+
+
+## Important details
+
+* `rspec_junit_formatter` is for formatting rspec output in something JUnit compatible.
+* `simplecov-rcov` is for Jenkins to be able to parse coverage output.
