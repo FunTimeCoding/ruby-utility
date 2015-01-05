@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="ruby-skeleton" default="build" basedir=".">
+    <property name="workspace" value="${basedir}"/>
+
+    <target name="build">
+        <delete dir="${workspace}/build"/>
+        <mkdir dir="${workspace}/build/log"/>
+        <exec executable="bash">
+            <arg value="-l"/>
+            <arg value="-c"/>
+            <arg value="COVERAGE=on rspec --format RspecJunitFormatter --out build/log/rspec.xml"/>
+        </exec>
+    </target>
+</project>

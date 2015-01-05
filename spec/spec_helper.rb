@@ -9,7 +9,7 @@ if (ENV['COVERAGE'] == 'on')
     end
     SimpleCov.formatter = SimpleCov::Formatter::MergedFormatter
     SimpleCov.start do
-        coverage_dir 'ci/build/simplecov'
+        coverage_dir 'build/simplecov'
         add_filter "/vendor/"
     end
 end
