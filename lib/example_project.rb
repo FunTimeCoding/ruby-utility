@@ -1,5 +1,6 @@
 class ExampleProject
-    def add(a, b)
-        a + b
+    def run()
+        message = 'hello world'
+        message
     end
 end

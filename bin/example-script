@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
 require 'example_project'
 
-puts ExampleProject.new.add(1, 2)
+puts ExampleProject.new.run()
