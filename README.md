@@ -33,5 +33,6 @@ ant
 
 ## Important details
 
-* `rspec_junit_formatter` is for formatting rspec output in something JUnit compatible.
-* `simplecov-rcov` is for Jenkins to be able to parse coverage output.
+* The gem dependency `rspec_junit_formatter` is for formatting rspec output in something JUnit compatible.
+* The gem dependency `simplecov-rcov` is for Jenkins to be able to parse coverage output.
+* The directories `lib/language_examle` and `spec/language_example` are for sharing language specific knowledge.
