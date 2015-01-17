@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
-require 'NAME'
+require 'example_project'
 
-puts NAME.new.add(1, 2)
+puts ExampleProject.new.add(1, 2)
