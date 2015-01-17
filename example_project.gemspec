@@ -3,10 +3,11 @@ $:.push File.expand_path('../lib', __FILE__)
 require 'example_project/version'
 
 Gem::Specification.new do |s|
-    s.name = 'example_project'
+    s.name = 'example-project'
     s.version = NAME::VERSION
     s.authors = ['Alexander Reitzel']
     s.email = ['funtimecoding@gmail.com']
+    s.licenses = ['MIT']
     s.homepage = ''
     s.summary = %q{TODO: Write a gem summary}
     s.description = %q{TODO: Write a gem description}
