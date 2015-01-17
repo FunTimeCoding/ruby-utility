@@ -25,7 +25,7 @@ echo "Initials: ${INITIALS}"
 
 sed -i "" -e "s/ep/${INITIALS}/g" bin/example-script spec/example_project_spec.rb
 sed -i "" -e "s/example_project/${UNDERSCORE}/g" bin/example-script spec/example_project_spec.rb example_project.gemspec
-sed -i "" -e "s/ExampleProject/${CAMEL}/g" bin/example-script spec/example_project_spec.rb lib/example_project.py
+sed -i "" -e "s/ExampleProject/${CAMEL}/g" bin/example-script spec/example_project_spec.rb lib/example_project.rb
 sed -i "" -e "s/example-project/${DASH}/g" example_project.gemspec
 
 git mv "lib/example_project" "lib/${UNDERSCORE}"
