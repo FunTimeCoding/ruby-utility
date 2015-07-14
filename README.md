@@ -15,25 +15,21 @@ ruby -I lib bin/example-script
 Install test tools.
 
 ```sh
-gem install rspec simplecov simplecov-rcov rspec_junit_formatter metric_fu
+gem install rspec simplecov simplecov-rcov rspec_junit_formatter metric_fu rubocop
 ```
 
-Run tests.
+Run code style check, metrics and tests.
 
 ```sh
-rspec
+./run-style-check.sh
+./run-metrics.sh
+./run-tests.sh
 ```
 
-Run metrics.
+Build project like Jenkins.
 
 ```sh
-metric_fu
-```
-
-Run ant like Jenkins. Requires `ant` to be installed.
-
-```sh
-ant
+./build.sh
 ```
 
 

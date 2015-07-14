@@ -2,4 +2,4 @@
 require 'example_project'
 
 ep = ExampleProject.new
-puts ep.run()
+puts ep.run

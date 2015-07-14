@@ -1,5 +1,5 @@
 class ExampleProject
-    def run()
+    def run
         message = 'hello world'
         message
     end
