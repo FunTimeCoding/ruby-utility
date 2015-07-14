@@ -1,6 +1,5 @@
 class ExampleProject
-    def run
-        message = 'hello world'
-        message
-    end
+  def run
+    'hello world'
+  end
 end
