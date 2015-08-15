@@ -1,9 +1,9 @@
 require 'spec_helper'
-require 'example_project'
+require 'ruby_skeleton'
 
-describe ExampleProject do
+describe RubySkeleton do
   it 'return hello world' do
-    ep = ExampleProject.new
+    ep = RubySkeleton.new
     expect(ep.run).to eq('hello world')
   end
 end

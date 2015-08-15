@@ -1,4 +1,4 @@
-# Ruby Skeleton
+# RubySkeleton
 
 
 ## Operation
@@ -6,7 +6,7 @@
 Run scripts.
 
 ```sh
-ruby -I lib bin/example-script
+ruby -I lib bin/rs
 ```
 
 

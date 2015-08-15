@@ -1,4 +1,4 @@
-class ExampleProject
+class RubySkeleton
   def run
     'hello world'
   end

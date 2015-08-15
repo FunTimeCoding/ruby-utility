@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-require 'example_project'
+require 'ruby_skeleton'
 
-ep = ExampleProject.new
+ep = RubySkeleton.new
 puts ep.run

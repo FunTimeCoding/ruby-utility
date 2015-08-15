@@ -5,31 +5,29 @@
 CAMEL=$(echo "${1}" | grep -E '^([A-Z][a-z0-9]+){2,}$') || CAMEL=""
 
 if [ "${CAMEL}" = "" ]; then
-    echo "Usage: ${0} MyUpperCamelCaseProjectName"
+    echo "Usage: ${0} UpperCamelCaseProject"
 
     exit 1
+fi
+
+OS=$(uname)
+
+if [ "${OS}" = "Darwin" ]; then
+    SED="gsed"
+else
+    SED="sed"
 fi
 
 DASH=$(echo "${CAMEL}" | sed -E 's/([A-Za-z0-9])([A-Z])/\1-\2/g' | tr '[:upper:]' '[:lower:]')
 UNDERSCORE=$(echo "${DASH}" | sed -E 's/-/_/g')
 INITIALS=$(echo "${CAMEL}" | sed 's/\([A-Z]\)[a-z]*/\1/g' | tr '[:upper:]' '[:lower:]')
-echo "Camel: ${CAMEL}"
-echo "Underscore: ${UNDERSCORE}"
-echo "Dash: ${DASH}"
-echo "Initials: ${INITIALS}"
-OS=$(uname)
-
-if [ "${OS}" = "Darwin" ]; then
-    alias sed='gsed'
-fi
-
-sed -i -e "s/ep/${INITIALS}/g" bin/rs spec/example_project_spec.rb
-sed -i -e "s/example_project/${UNDERSCORE}/g" bin/rs spec/example_project_spec.rb example_project.gemspec
-sed -i -e "s/ExampleProject/${CAMEL}/g" bin/rs spec/example_project_spec.rb lib/example_project.rb
-sed -i -e "s/example-project/${DASH}/g" example_project.gemspec
-git mv lib/example_project "lib/${UNDERSCORE}"
-git mv spec/example_project_spec.rb "spec/${UNDERSCORE}_spec.rb"
-git mv lib/example_project.rb "lib/${UNDERSCORE}.rb"
-git mv example_project.gemspec "${UNDERSCORE}.gemspec"
+echo "UNDERSCORE: ${UNDERSCORE}"
+echo "DASH: ${DASH}"
+echo "INITIALS: ${INITIALS}"
+find -E . -type f ! -regex '^.*/(build|\.git|\.idea)/.*$' -exec sh -c '${1} -i -e "s/RubySkeleton/${2}/g" -e "s/ruby-skeleton/${3}/g" -e "s/ruby_skeleton/${4}/g" -e "s/bin\/rs/bin\/${5}/g" ${6}' '_' "${SED}" "${CAMEL}" "${DASH}" "${UNDERSCORE}" "${INITIALS}" '{}' \;
+git mv lib/ruby_skeleton "lib/${UNDERSCORE}"
+git mv spec/ruby_skeleton_spec.rb "spec/${UNDERSCORE}_spec.rb"
+git mv lib/ruby_skeleton.rb "lib/${UNDERSCORE}.rb"
+git mv ruby_skeleton.gemspec "${UNDERSCORE}.gemspec"
 git mv bin/rs "bin/${INITIALS}"
-echo "Done. Files were edited and moved using git. Review those changes. You may also delete this script now."
+echo "Done. Files were edited and moved using git. Review those changes."
