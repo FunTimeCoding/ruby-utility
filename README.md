@@ -1,11 +1,11 @@
-# RubySkeleton
+# RubyUtility
 
 ## Operation
 
 Run scripts.
 
 ```sh
-ruby -I lib bin/rs
+ruby -I lib bin/ru
 ```
 
 

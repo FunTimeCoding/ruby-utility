@@ -1,6 +1,6 @@
 # encoding: UTF-8
 
-class RubySkeleton
+class RubyUtility
   def run
     'Hello friend.'
   end

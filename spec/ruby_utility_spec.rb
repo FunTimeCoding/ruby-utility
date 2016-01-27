@@ -1,11 +1,11 @@
 # encoding: UTF-8
 
 require 'spec_helper'
-require 'ruby_skeleton'
+require 'ruby_utility'
 
-describe RubySkeleton do
+describe RubyUtility do
   it 'return a greeting' do
-    ep = RubySkeleton.new
+    ep = RubyUtility.new
     expect(ep.run).to eq('Hello friend.')
   end
 end
