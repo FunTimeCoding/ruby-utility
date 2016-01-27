@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# encoding: UTF-8
 $LOAD_PATH.push File.expand_path('../lib', __FILE__)
 require 'ruby_skeleton/version'
 

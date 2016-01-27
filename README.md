@@ -17,7 +17,7 @@ Install test tools.
 gem install rspec simplecov simplecov-rcov rspec_junit_formatter metric_fu rubocop roodi flog
 ```
 
-Run code style check, metrics and tests.
+Run style checks, metrics and tests.
 
 ```sh
 ./run-style-check.sh
@@ -25,7 +25,7 @@ Run code style check, metrics and tests.
 ./run-tests.sh
 ```
 
-Build project like Jenkins.
+Build the project like Jenkins.
 
 ```sh
 ./build.sh

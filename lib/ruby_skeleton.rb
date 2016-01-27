@@ -1,5 +1,7 @@
+# encoding: UTF-8
+
 class RubySkeleton
   def run
-    'hello world'
+    'Hello friend.'
   end
 end

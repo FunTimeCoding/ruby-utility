@@ -32,9 +32,9 @@ while true; do
 done
 
 if [ "${WORKSPACE}" = "" ]; then
-    DIR=$(dirname "${0}")
-    SCRIPT_DIR=$(cd "${DIR}"; pwd)
-    WORKSPACE="${SCRIPT_DIR}"
+    DIRECTORY=$(dirname "${0}")
+    SCRIPT_DIRECTORY=$(cd "${DIRECTORY}"; pwd)
+    WORKSPACE="${SCRIPT_DIRECTORY}"
 fi
 
 echo "WORKSPACE: ${WORKSPACE}"
