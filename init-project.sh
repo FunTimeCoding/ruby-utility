@@ -5,17 +5,19 @@
 CAMEL=$(echo "${1}" | grep -E '^([A-Z][a-z0-9]+){2,}$') || CAMEL=""
 
 if [ "${CAMEL}" = "" ]; then
-    echo "Usage: ${0} UpperCamelCaseProject"
+    echo "Usage: ${0} UpperCamelCaseName"
 
     exit 1
 fi
 
-OS=$(uname)
+OPERATING_SYSTEM=$(uname)
 
-if [ "${OS}" = "Darwin" ]; then
+if [ "${OPERATING_SYSTEM}" = "Darwin" ]; then
     SED="gsed"
+    FIND="gfind"
 else
     SED="sed"
+    FIND="find"
 fi
 
 DASH=$(echo "${CAMEL}" | sed -E 's/([A-Za-z0-9])([A-Z])/\1-\2/g' | tr '[:upper:]' '[:lower:]')
@@ -24,10 +26,12 @@ INITIALS=$(echo "${CAMEL}" | sed 's/\([A-Z]\)[a-z]*/\1/g' | tr '[:upper:]' '[:lo
 echo "UNDERSCORE: ${UNDERSCORE}"
 echo "DASH: ${DASH}"
 echo "INITIALS: ${INITIALS}"
-find -E . -type f ! -regex '^.*/(build|\.git|\.idea)/.*$' -exec sh -c '${1} -i -e "s/RubySkeleton/${2}/g" -e "s/ruby-skeleton/${3}/g" -e "s/ruby_skeleton/${4}/g" -e "s/bin\/rs/bin\/${5}/g" ${6}' '_' "${SED}" "${CAMEL}" "${DASH}" "${UNDERSCORE}" "${INITIALS}" '{}' \;
+# shellcheck disable=SC2016
+${FIND} . -type f -regextype posix-extended ! -regex '^.*/(build|\.git|\.idea)/.*$' -exec sh -c '${1} -i -e "s/RubySkeleton/${2}/g" -e "s/ruby-skeleton/${3}/g" -e "s/ruby_skeleton/${4}/g" -e "s/bin\/rs/bin\/${5}/g" ${6}' '_' "${SED}" "${CAMEL}" "${DASH}" "${UNDERSCORE}" "${INITIALS}" '{}' \;
 git mv lib/ruby_skeleton "lib/${UNDERSCORE}"
 git mv spec/ruby_skeleton_spec.rb "spec/${UNDERSCORE}_spec.rb"
 git mv lib/ruby_skeleton.rb "lib/${UNDERSCORE}.rb"
 git mv ruby_skeleton.gemspec "${UNDERSCORE}.gemspec"
 git mv bin/rs "bin/${INITIALS}"
+rm init-project.sh sync-project.sh
 echo "Done. Files were edited and moved using git. Review those changes."
