@@ -4,8 +4,8 @@ require 'spec_helper'
 require 'ruby_utility'
 
 describe RubyUtility do
-  it 'return a greeting' do
-    ep = RubyUtility.new
-    expect(ep.run).to eq('Hello friend.')
+  it 'should return a greeting' do
+    application = RubyUtility.new
+    expect(application.run).to eq('Hello friend.')
   end
 end

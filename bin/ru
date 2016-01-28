@@ -2,5 +2,5 @@
 # encoding: UTF-8
 require 'ruby_utility'
 
-ep = RubyUtility.new
-puts ep.run
+application = RubyUtility.new
+puts application.run
