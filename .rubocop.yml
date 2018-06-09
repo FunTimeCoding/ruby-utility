@@ -2,3 +2,5 @@ Documentation:
     Enabled: false
 Style/ConditionalAssignment:
   EnforcedStyle: assign_inside_condition
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
