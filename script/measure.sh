@@ -10,13 +10,12 @@ else
     FIND='find'
 fi
 
-FILES_EXCLUDE='^.*\/(build|tmp|\.git|\.vagrant|\.idea)\/.*$'
-FILES=$(${FIND} . -type f -regextype posix-extended ! -regex "${FILES_EXCLUDE}" | ${WC} --lines)
+EXCLUDE_FILTER='^.*\/(build|vendor|tmp|\.git|\.vagrant|\.bundle|\.idea)\/.*$'
+FILES=$(${FIND} . -regextype posix-extended -type f -and ! -regex "${EXCLUDE_FILTER}" | ${WC} --lines)
 DIRECTORIES_EXCLUDE='^.*\/(build|tmp|\.git|\.vagrant|\.idea)(\/.*)?$'
-DIRECTORIES=$(${FIND} . -type d -regextype posix-extended ! -regex "${DIRECTORIES_EXCLUDE}" | ${WC} --lines)
+DIRECTORIES=$(${FIND} . -regextype posix-extended -type d -and ! -regex "${DIRECTORIES_EXCLUDE}" | ${WC} --lines)
 INCLUDE='^.*\.rb$'
-CODE_EXCLUDE='^.*\/(build|tmp|\.git|\.vagrant|\.idea)\/.*$'
-CODE=$(${FIND} . -type f -regextype posix-extended -regex "${INCLUDE}" -and ! -regex "${CODE_EXCLUDE}" | xargs cat)
+CODE=$(${FIND} . -regextype posix-extended -type f -and -regex "${INCLUDE}" -and ! -regex "${EXCLUDE_FILTER}" | xargs cat)
 LINES=$(echo "${CODE}" | ${WC} --lines)
 NON_BLANK_LINES=$(echo "${CODE}" | grep --invert-match --regexp '^$' | ${WC} --lines)
 echo "FILES: ${FILES}"

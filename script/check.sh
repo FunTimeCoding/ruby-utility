@@ -15,7 +15,16 @@ if [ "${1}" = --ci-mode ]; then
     CONTINUOUS_INTEGRATION_MODE=true
 fi
 
-MARKDOWN_FILES=$(find . -name '*.md')
+SYSTEM=$(uname)
+
+if [ "${SYSTEM}" = Darwin ]; then
+    FIND='gfind'
+else
+    FIND='find'
+fi
+
+EXCLUDE_FILTER='^.*\/(build|vendor|tmp|\.git|\.vagrant|\.bundle|\.idea)\/.*$'
+MARKDOWN_FILES=$(${FIND} . -regextype posix-extended -name '*.md' -and ! -regex "${EXCLUDE_FILTER}")
 BLACKLIST=""
 DICTIONARY=en_US
 mkdir -p tmp
@@ -46,7 +55,7 @@ for FILE in ${MARKDOWN_FILES}; do
     fi
 done
 
-TEX_FILES=$(find . -name '*.tex')
+TEX_FILES=$(${FIND} . -regextype posix-extended -name '*.tex' -and ! -regex "${EXCLUDE_FILTER}")
 
 for FILE in ${TEX_FILES}; do
     WORDS=$(hunspell -d "${DICTIONARY}" -p tmp/combined.dic -l -t "${FILE}")
@@ -79,18 +88,8 @@ for FILE in ${TEX_FILES}; do
     fi
 done
 
-SYSTEM=$(uname)
-
-if [ "${SYSTEM}" = Darwin ]; then
-    FIND='gfind'
-else
-    FIND='find'
-fi
-
-EXCLUDE_FILTER='^.*\/(build|tmp|\.git|\.vagrant|\.idea)\/.*$'
-
 if [ "${CONTINUOUS_INTEGRATION_MODE}" = true ]; then
-    FILES=$(${FIND} . -name '*.sh' -regextype posix-extended ! -regex "${EXCLUDE_FILTER}" -printf '%P\n')
+    FILES=$(${FIND} . -regextype posix-extended -name '*.sh' -and ! -regex "${EXCLUDE_FILTER}" -printf '%P\n')
 
     for FILE in ${FILES}; do
         FILE_REPLACED=$(echo "${FILE}" | sed 's/\//-/g')
@@ -98,7 +97,7 @@ if [ "${CONTINUOUS_INTEGRATION_MODE}" = true ]; then
     done
 else
     # shellcheck disable=SC2016
-    SHELL_SCRIPT_CONCERNS=$(${FIND} . -name '*.sh' -regextype posix-extended ! -regex "${EXCLUDE_FILTER}" -exec sh -c 'shellcheck ${1} || true' '_' '{}' \;)
+    SHELL_SCRIPT_CONCERNS=$(${FIND} . -regextype posix-extended -name '*.sh' -and ! -regex "${EXCLUDE_FILTER}" -exec sh -c 'shellcheck ${1} || true' '_' '{}' \;)
 
     if [ ! "${SHELL_SCRIPT_CONCERNS}" = "" ]; then
         CONCERN_FOUND=true
@@ -109,7 +108,7 @@ fi
 
 EXCLUDE_FILTER_WITH_INIT='^.*\/((build|tmp|\.git|\.vagrant|\.idea)\/.*|__init__\.py)$'
 # shellcheck disable=SC2016
-EMPTY_FILES=$(${FIND} . -empty -regextype posix-extended ! -regex "${EXCLUDE_FILTER_WITH_INIT}")
+EMPTY_FILES=$(${FIND} . -regextype posix-extended -empty -and ! -regex "${EXCLUDE_FILTER_WITH_INIT}")
 
 if [ ! "${EMPTY_FILES}" = "" ]; then
     CONCERN_FOUND=true
@@ -153,7 +152,7 @@ if [ ! "${SHELLCHECK_IGNORES}" = "" ]; then
 fi
 
 RETURN_CODE=0
-RUBOCOP_CONCERNS=$(rubocop) || RETURN_CODE=$?
+RUBOCOP_CONCERNS=$(bundle exec rubocop) || RETURN_CODE=$?
 
 if [ "${CONTINUOUS_INTEGRATION_MODE}" = true ]; then
     echo "${RUBOCOP_CONCERNS}" > build/log/rubocop.txt
@@ -169,7 +168,7 @@ fi
 
 echo
 RETURN_CODE=0
-ROODI_CONCERNS=$(roodi "**/*.rb") || RETURN_CODE=$?
+ROODI_CONCERNS=$(bundle exec roodi "lib/**/*.rb") || RETURN_CODE=$?
 
 if [ "${CONTINUOUS_INTEGRATION_MODE}" = true ]; then
     echo "${ROODI_CONCERNS}" > build/log/roodi.txt
@@ -186,7 +185,7 @@ fi
 echo
 RETURN_CODE=0
 # shellcheck disable=SC2016
-FLOG_CONCERNS=$(${FIND} . -name '*.rb' -exec sh -c 'echo ${1}; flog ${1}' '_' '{}' \;) || RETURN_CODE=$?
+FLOG_CONCERNS=$(${FIND} . -regextype posix-extended -name '*.rb' -and ! -regex "${EXCLUDE_FILTER}" -exec sh -c 'echo ${1}; bundle exec flog ${1}' '_' '{}' \;) || RETURN_CODE=$?
 
 if [ "${CONTINUOUS_INTEGRATION_MODE}" = true ]; then
     echo "${FLOG_CONCERNS}" > build/log/flog.txt
