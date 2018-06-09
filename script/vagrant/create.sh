@@ -1,3 +1,3 @@
 #!/bin/sh -e
 
-metric_fu
+vagrant up

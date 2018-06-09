@@ -1,39 +1,61 @@
 # RubyUtility
 
-## Operation
+## Setup
 
-Run scripts.
+Install project dependencies.
+
+```sh
+script/setup.sh
+```
+
+
+## Usage
+
+This section explains how to use the project.
+
+Run the main program.
 
 ```sh
 ruby -I lib bin/ru
 ```
 
 
-## Testing
+## Development
 
-Install test tools.
+This section explains how to improve the project.
 
-```sh
-gem install rspec simplecov simplecov-rcov rspec_junit_formatter metric_fu rubocop roodi flog
-```
-
-Run style checks, metrics and tests.
+Configure Git on Windows before cloning. This avoids problems with Vagrant and VirtualBox.
 
 ```sh
-./run-style-check.sh
-./run-metrics.sh
-./run-tests.sh
+git config --global core.autocrlf input
 ```
 
-Build the project like Jenkins.
+Create the development virtual machine on Linux and Darwin.
 
 ```sh
-./build.sh
+script/vagrant/create.sh
 ```
 
+Create the development virtual machine on Windows.
 
-## Important details
+```bat
+script\vagrant\create.bat
+```
 
-* The gem dependency `rspec_junit_formatter` is for formatting rspec output in something JUnit compatible.
-* The gem dependency `simplecov-rcov` is for Jenkins to be able to parse coverage output.
-* The directories `lib/language_example` and `spec/language_example` are for sharing language specific knowledge.
+Run tests.
+
+```sh
+script/test.sh [--help]
+```
+
+Run style check.
+
+```sh
+script/check.sh [--help]
+```
+
+Build project.
+
+```sh
+script/build.sh
+```
