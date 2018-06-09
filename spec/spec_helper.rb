@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 if ENV['COVERAGE'] == 'on'
   require 'simplecov'
   require 'simplecov-rcov'
