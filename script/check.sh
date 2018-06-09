@@ -106,9 +106,8 @@ else
     fi
 fi
 
-EXCLUDE_FILTER_WITH_INIT='^.*\/((build|tmp|\.git|\.vagrant|\.idea)\/.*|__init__\.py)$'
 # shellcheck disable=SC2016
-EMPTY_FILES=$(${FIND} . -regextype posix-extended -empty -and ! -regex "${EXCLUDE_FILTER_WITH_INIT}")
+EMPTY_FILES=$(${FIND} . -regextype posix-extended -empty -and ! -regex "${EXCLUDE_FILTER}")
 
 if [ ! "${EMPTY_FILES}" = "" ]; then
     CONCERN_FOUND=true
