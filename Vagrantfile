@@ -33,7 +33,7 @@ def read_or_determine_hostname
     File.read('tmp/hostname.txt').chomp
   else
     hostname = determine_hostname
-    File.write('tmp/hostname.txt', bridge + "\n")
+    File.write('tmp/hostname.txt', hostname + "\n")
     hostname
   end
 end
