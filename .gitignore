@@ -1,5 +1,9 @@
-build
-tmp
-.vagrant
-.bundle
-vendor
+/build
+/tmp
+/.vagrant
+/debian/files
+/debian/debhelper-build-stamp
+/debian/ruby-utility
+/debian/ruby-utility.substvars
+/documentation/man/*.1
+/.scannerwork

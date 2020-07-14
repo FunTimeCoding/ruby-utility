@@ -1,5 +1,12 @@
 addr
 inet
-sudo
 netstat
-sshd
+libpam
+zoneinfo
+mkpasswd
+udev
+inittab
+initrd
+syslinux
+ifdata
+dhclient
