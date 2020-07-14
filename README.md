@@ -14,7 +14,7 @@ script/setup.sh
 Run the main program:
 
 ```sh
-ruby -I lib bin/rs
+ruby -I lib bin/ru
 ```
 
 Run the main program inside the container:
