@@ -3,9 +3,9 @@
 SYSTEM=$(uname)
 
 if [ "${SYSTEM}" = Linux ]; then
-    if [ "$(command -v lsb_release || true)" = "" ]; then
+    if [ "$(command -v lsb_release || true)" = '' ]; then
         if [ -f /etc/debian_version ]; then
-            VERSION=$(cut -c 1-1 < /etc/debian_version)
+            VERSION=$(cut -c 1-1 </etc/debian_version)
         fi
     else
         VERSION=$(lsb_release --release --short)
@@ -15,8 +15,12 @@ if [ "${SYSTEM}" = Linux ]; then
         CODENAME=jessie
     elif [ "${VERSION}" = 9 ]; then
         CODENAME=stretch
+    elif [ "${VERSION}" = 10 ]; then
+        CODENAME=buster
     elif [ "${VERSION}" = 16.04 ]; then
         CODENAME=xenial
+    elif [ "${VERSION}" = 18.04 ]; then
+        CODENAME=bionic
     else
         echo "Operating system not supported."
 
@@ -24,7 +28,7 @@ if [ "${SYSTEM}" = Linux ]; then
     fi
 fi
 
-if [ "$(command -v vboxmanage || true)" = "" ]; then
+if [ "$(command -v vboxmanage || true)" = '' ]; then
     if [ "${SYSTEM}" = Darwin ]; then
         brew cask install virtualbox
     else
@@ -36,24 +40,16 @@ if [ "$(command -v vboxmanage || true)" = "" ]; then
         fi
 
         sudo apt-get --quiet 2 update
-        sudo apt-get --quiet 2 install virtualbox-5.1
+        sudo apt-get --quiet 2 install virtualbox-6.1
     fi
 fi
 
-if [ "$(command -v vagrant || true)" = "" ]; then
+if [ "$(command -v vagrant || true)" = '' ]; then
     if [ "${SYSTEM}" = Darwin ]; then
         brew cask install vagrant
     else
-        if [ "${CODENAME}" = stretch ]; then
-            sudo apt-get --quiet 2 install vagrant
-        else
-            VAGRANT_VERSION=2.1.1
-            wget --no-verbose --output-document /tmp/vagrant.deb "https://releases.hashicorp.com/vagrant/${VAGRANT_VERSION}/vagrant_${VAGRANT_VERSION}_x86_64.deb"
-            sudo dpkg --install /tmp/vagrant.deb
-        fi
+        VAGRANT_VERSION=2.2.9
+        wget --no-verbose --output-document /tmp/vagrant.deb "https://releases.hashicorp.com/vagrant/${VAGRANT_VERSION}/vagrant_${VAGRANT_VERSION}_x86_64.deb"
+        sudo dpkg --install /tmp/vagrant.deb
     fi
 fi
-
-# Speed up repeated installing of packages by caching downloaded files.
-# Source: https://github.com/fgrehm/vagrant-cachier
-vagrant plugin list | grep --quiet vagrant-cachier || vagrant plugin install vagrant-cachier
